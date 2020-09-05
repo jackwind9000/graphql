@@ -4,15 +4,16 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/graphql-go/handler"
-	"github.com/jackwind9000/graphql/schema"
+	"github.com/jackwind9000/graphql/resolver"
+
+	"github.com/99designs/gqlgen/graphql/playground"
 )
 
 const defaultPort = "9876"
 
 func main() {
-	schema := schema.Init()
+	schema := resolver.Init()
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/public"))
 	http.Handle("/public", handler.New(&handler.Config{
